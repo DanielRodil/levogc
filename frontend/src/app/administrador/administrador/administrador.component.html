@@ -1,0 +1,81 @@
+<div class="row" id="lineaInferior">
+  <ul class="nav">
+    <li class="nav-item">
+    <a class="nav-link" routerLink="vehiculo/formulario">Alta Vehículo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">Búsqueda por Unidad</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">En construcción</a></li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">Destacamentos</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">En construcción</a></li>
+      </ul>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="dropdown" aria-expanded="false">Facturación</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">En construcción</a></li>
+      </ul>
+    </li>
+  </ul>
+
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-md-6 login-form-1">
+    <div class="row" id="tituloLogin">BÚSQUEDA DE VEHÍCULO</div> 
+    
+    
+    <div class="row">
+    <div class="col-8">
+      <input type="text" class="form-control input-matricula" id="matricula"
+        placeholder="p.e., PGC0000A" [(ngModel)]="matricula" required>
+    </div>
+    <div class="col-4">
+    <fa-icon [icon]="limpiar" (click)="clear()">Limpiar</fa-icon>
+    </div>
+    </div>
+    <br>
+    <button type="button" class="btn btn-success btn-md" (click)="vehiculoBuscado(matricula)">
+      Buscar
+    </button>
+    
+    <div class="row" id='vehiculoIncorrecto'>{{vehiculoIncorrecto}}</div>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div *ngFor="let vehiculo of vehiculos">
+  <app-busqueda-item [vehiculo]="vehiculo" (vehiculoConsultar)="onVehiculoConsultar($event)"
+    (vehiculoEliminar)="onVehiculoEliminar($event)" (vehiculoEditar)="onVehiculoEditar($event)">
+  </app-busqueda-item>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

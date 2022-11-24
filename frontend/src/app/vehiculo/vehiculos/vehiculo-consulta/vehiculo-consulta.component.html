@@ -1,0 +1,580 @@
+<div class="row" id="lineaInferior">
+  <div class=" col-2"></div>
+  <div class=" col-8">
+  <p class="fs-x">{{vehiculo.matricula|uppercase}}</p>
+  </div>
+  <div class=" col-2">
+    <p id="volver"><fa-icon [icon]="volver" (click)="goBack()"></fa-icon>
+    Volver</p>
+  </div>
+</div>
+
+<mat-stepper #stepper>
+
+  <!-- Primer step -->
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+    <ng-template matStepLabel>DATOS IDENTIFICATIVOS</ng-template>
+
+      <br>
+
+      <div class="row">
+
+        <div class="col-xl-6">
+          <mat-form-field class="fs-5" appearance="outline">
+            <mat-label>Matrícula</mat-label>
+            <input type="text" matInput formControlName="matricula" [(ngModel)]="vehiculo.matricula" readonly />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6">
+          <mat-form-field class="fs-5" appearance="outline">
+            <mat-label>Fecha Alta</mat-label>
+            <input type="date" matInput formControlName="fechaAlta" [(ngModel)]="vehiculo.fechaAlta" readonly />
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <br>
+      <hr>
+      <br>
+
+      <div class="row">
+
+        <div class="col-xl-4">
+          <mat-form-field class="fs-5" appearance="outline">
+            <mat-label>Marca</mat-label>
+            <input type="text" matInput formControlName="marca" [(ngModel)]="vehiculo.marca" readonly />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-4">
+          <mat-form-field class="fs-5" appearance="outline">
+            <mat-label>Modelo</mat-label>
+            <input type="text" matInput formControlName="modelo" [(ngModel)]="vehiculo.modelo" readonly />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-4">
+          <mat-form-field class="fs-5" appearance="outline">
+            <mat-label>Tipo Vehículo</mat-label>
+            <input type="text" matInput formControlName="tipoVehiculo" [(ngModel)]="vehiculo.tipo" readonly />
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <br>
+      <hr>
+      <br>
+
+      <div class="row">
+
+        <div class="col-xl-6">
+          <mat-form-field class="fs-5" appearance="outline">
+            <mat-label>Unidad Destino</mat-label>
+            <input type="text" matInput formControlName="unidadDestino" [(ngModel)]="vehiculo.unidadDestino" readonly />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6">
+          <mat-form-field class="fs-5" appearance="outline">
+            <mat-label>Fecha Adjudicación</mat-label>
+            <input type="date" matInput formControlName="fechaAdjudicacion" [(ngModel)]="vehiculo.fechaAdjudicacion" readonly />
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <br>
+
+      <div>
+        <button class="btn btn-primary btn-md" mat-button matStepperNext [disabled]="">Siguiente</button>
+      </div>
+
+      <br>
+
+    </form>
+  </mat-step>
+
+  <!-- Segundo step -->
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+    <ng-template matStepLabel>DATOS TÉCNICOS DE INTERES</ng-template>
+
+      <br>
+
+      <div class="row">
+
+        <div class="col-xl-3">
+          <mat-form-field class="fs-6" appearance="outline">
+            <mat-label>Nº Bastidor</mat-label>
+            <input type="text" matInput formControlName="bastidor" [(ngModel)]="datosTecnicosInteres.bastidor" readonly />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3">
+          <mat-form-field class="fs-6" appearance="outline">
+            <mat-label>Color Carrocería</mat-label>
+            <input type="text" matInput formControlName="color" [(ngModel)]="datosTecnicosInteres.color" readonly />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3">
+          <mat-form-field class="fs-6" appearance="outline">
+            <mat-label>Clasif Medioambiental</mat-label>
+            <input type="text" matInput formControlName="clasificacionMedioambiental" [(ngModel)]="datosTecnicosInteres.clasificacionMedioambiental" readonly />
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-3">
+          <mat-form-field class="fs-6" appearance="outline">
+            <mat-label>Tipo Cambio</mat-label>
+            <input type="text" matInput formControlName="cambio" [(ngModel)]="datosTecnicosInteres.cambio" readonly />
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <br>
+      <hr>
+      <br>
+
+      <div class="row">
+        <p class="fs-5">Combustible</p>
+
+          <div class="col-xl-6">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Tipo Combustible</mat-label>
+              <input type="text" matInput formControlName="combustible" [(ngModel)]="datosTecnicosInteres.combustible" readonly />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Capacidad Depósito</mat-label>
+              <input type="number" matInput formControlName="capacidadDeposito" [(ngModel)]="datosTecnicosInteres.capacidadDeposito" readonly />
+              <span matSuffix>Litros</span>
+            </mat-form-field>
+          </div>
+
+      </div>
+
+      <br>
+      <hr>
+      <br>
+
+      <div class="row">
+        <p class="fs-5">Aceite</p>
+
+          <div class="col-xl-6">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Lubricante</mat-label>
+              <input type="text" matInput formControlName="lubricanteMotor" [(ngModel)]="datosTecnicosInteres.lubricanteMotor" readonly />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-6">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Capacidad Carter</mat-label>
+              <input type="number" matInput formControlName="capacidadCarter" [(ngModel)]="datosTecnicosInteres.capacidadCarter" readonly />
+              <span matSuffix>&nbsp;&nbsp;Litros</span>
+            </mat-form-field>
+          </div>
+
+      </div>
+
+      <br>
+      <hr>
+      <br>
+
+      <div class="row">
+        <p class="fs-5">Neumáticos</p>
+
+          <div class="col-xl-4">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Presión Delanteros</mat-label>
+              <input type="number" matInput  formControlName="presionNeumaticosDelanteros" [(ngModel)]="datosTecnicosInteres.presionNeumaticosDelanteros" readonly />
+              <span matSuffix>&nbsp;&nbsp;Kg/cm2</span>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Presión Traseros</mat-label>
+              <input type="number" matInput formControlName="presionNeumaticosTraseros" [(ngModel)]="datosTecnicosInteres.presionNeumaticosTraseros" readonly />
+              <span matSuffix>&nbsp;&nbsp;Kg/cm2</span>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-4">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Tipo Cubiertas</mat-label>
+              <input type="text" matInput formControlName="tipoCubiertas" [(ngModel)]="datosTecnicosInteres.tipoCubiertas" readonly />
+            </mat-form-field>
+          </div>
+
+      </div>
+
+      <br>
+      <hr>
+      <br>
+
+      <div class="row">
+        <p class="fs-5">Baterías</p>
+
+          <div class="col-xl-3">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Nº Baterías</mat-label>
+              <input type="number" matInput formControlName="numeroBaterias" [(ngModel)]="datosTecnicosInteres.numeroBaterias" readonly />
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Amperios/Hora</mat-label>
+              <input type="number" matInput formControlName="amperiosHoraBaterias" [(ngModel)]="datosTecnicosInteres.amperiosHoraBaterias" readonly />
+              <span matSuffix>&nbsp;&nbsp;amp/h</span>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Amperaje:</mat-label>
+              <input type="number" matInput formControlName="amperajeBaterias" [(ngModel)]="datosTecnicosInteres.amperajeBaterias" readonly />
+              <span matSuffix>&nbsp;&nbsp;amp</span>
+            </mat-form-field>
+          </div>
+
+          <div class="col-xl-3">
+            <mat-form-field class="fs-6" appearance="outline">
+              <mat-label>Voltaje:</mat-label>
+              <input type="number" matInput formControlName="voltajeBaterias" [(ngModel)]="datosTecnicosInteres.voltajeBaterias" readonly />
+              <span matSuffix>&nbsp;&nbsp;V</span>
+            </mat-form-field>
+          </div>
+
+      </div>
+
+      <br><br>
+
+      <div>
+        <button class="btn btn-warning btn-md" mat-button matStepperPrevious>Atrás</button>
+          &nbsp;&nbsp;&nbsp;
+        <button class="btn btn-primary btn-md" mat-button matStepperNext>Siguiente</button>
+      </div>
+
+      <br>
+
+    </form>
+  </mat-step>
+
+  <!-- Tercer step -->
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+    <ng-template matStepLabel> PLAN PREVENTIVO</ng-template>
+
+      <div class="row">
+
+        <div class="col-xl-12">
+          <mat-form-field class="fs-6" appearance="outline">
+            <mat-label>Condiciones Uso</mat-label>
+            <input type="text" matInput formControlName="condicionesUso" [(ngModel)]="mantenimientoPreventivo.condicionesUso" readonly />
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="container overflow-hidden text-center">
+
+        <div class="row gx-5">
+
+          <div class="col">
+            <div class="p-3 border bg-light">
+              <table class="table">
+
+                <thead>
+                  <tr>
+                    <th scope="col">Acción</th>
+                    <th scope="col">Kilómetros</th>
+                    <th scope="col">Meses</th>
+                  </tr>
+                </thead>
+
+                
+                <tbody>
+
+                  <tr>
+                    <th scope="row">* Operaciones Sistemáticas(**)</th>
+                    <td>
+                      <input matInput type="number" formControlName="operacionesSistematicasKm"
+                        [(ngModel)]="mantenimientoPreventivo.operacionesSistematicasKm">
+                      <div
+                        *ngIf="thirdFormGroup.get('operacionesSistematicasKm')?.touched && thirdFormGroup.get('operacionesSistematicasKm')?.errors?.['required']"
+                        class="alert alert-danger"> Campo obligatorio</div>
+                    </td>
+
+
+                    <td>
+                      <input matInput type="number" formControlName="operacionesSistematicasMes"
+                        [(ngModel)]="mantenimientoPreventivo.operacionesSistematicasMes">
+                      <div
+                        *ngIf="thirdFormGroup.get('operacionesSistematicasMes')?.touched && thirdFormGroup.get('operacionesSistematicasMes')?.errors?.['required']"
+                        class="alert alert-danger"> Campo obligatorio</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">* Líquido de frenos</th>
+                    <td>
+                      <input matInput type="number" formControlName="liquidoFrenosKm"
+                        [(ngModel)]="mantenimientoPreventivo.liquidoFrenosKm">
+                      <div
+                        *ngIf="thirdFormGroup.get('liquidoFrenosKm')?.touched && thirdFormGroup.get('liquidoFrenosKm')?.errors?.['required']"
+                        class="alert alert-danger"> Campo obligatorio</div>
+                    </td>
+                    <td><input matInput type="number" formControlName="liquidoFrenosMes"
+                        [(ngModel)]="mantenimientoPreventivo.liquidoFrenosMes">
+                      <div
+                        *ngIf="thirdFormGroup.get('liquidoFrenosMes')?.touched && thirdFormGroup.get('liquidoFrenosMes')?.errors?.['required']"
+                        class="alert alert-danger"> Campo obligatorio</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Filtro de Aire</th>
+                    <td>
+                      <input matInput type="number" formControlName="filtroAireKm"
+                        [(ngModel)]="mantenimientoPreventivo.filtroAireKm">
+                    </td>
+                    <td>
+                      <input matInput type="number" formControlName="filtroAireMes"
+                        [(ngModel)]="mantenimientoPreventivo.filtroAireMes">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Filtro de Aire Habitáculo</th>
+                    <td>
+                      <input matInput type="number" formControlName="filtroAireHabitaculoKm"
+                        [(ngModel)]="mantenimientoPreventivo.filtroAireHabitaculoKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="filtroAireHabitaculoMes"
+                        [(ngModel)]="mantenimientoPreventivo.filtroAireHabitaculoMes">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Filtro Combustible</th>
+                    <td>
+                      <input matInput type="number" formControlName="filtroCombustibleKm"
+                        [(ngModel)]="mantenimientoPreventivo.filtroCombustibleKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="filtroCombustibleMes"
+                        [(ngModel)]="mantenimientoPreventivo.filtroCombustibleMes">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Filtro Antipolen</th>
+                    <td>
+                      <input matInput type="number" formControlName="filtroAntipolenKm"
+                        [(ngModel)]="mantenimientoPreventivo.filtroAntipolenKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="filtroAntipolenMes"
+                        [(ngModel)]="mantenimientoPreventivo.filtroAntipolenMes">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Correa de Distribución</th>
+                    <td>
+                      <input matInput type="number" formControlName="correaDistribucionKm"
+                        [(ngModel)]="mantenimientoPreventivo.correaDistribucionKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="correaDistribucionMes"
+                        [(ngModel)]="mantenimientoPreventivo.correaDistribucionMes">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Kit de Distribución</th>
+                    <td>
+                      <input matInput type="number" formControlName="kitDistribucionKm"
+                        [(ngModel)]="mantenimientoPreventivo.kitDistribucionKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="kitDistribucionMes"
+                        [(ngModel)]="mantenimientoPreventivo.kitDistribucionMes">
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="p-3 border bg-light">
+              <table class="table">
+
+                <thead>
+                  <tr>
+                    <th scope="col">Acción</th>
+                    <th scope="col">Kilómetros</th>
+                    <th scope="col">Meses</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  <tr>
+                    <th scope="row">* Anticongelante</th>
+                    <td>
+                      <input matInput type="number" formControlName="anticongelanteKm"
+                        [(ngModel)]="mantenimientoPreventivo.anticongelanteKm">
+                      <div
+                        *ngIf="thirdFormGroup.get('anticongelanteKm')?.touched && thirdFormGroup.get('anticongelanteKm')?.errors?.['required']"
+                        class="alert alert-danger"> Campo obligatorio</div>
+                    </td>
+                    <td><input matInput type="number" formControlName="anticongelanteMes"
+                        [(ngModel)]="mantenimientoPreventivo.anticongelanteMes">
+                      <div
+                        *ngIf="thirdFormGroup.get('anticongelanteMes')?.touched && thirdFormGroup.get('anticongelanteMes')?.errors?.['required']"
+                        class="alert alert-danger"> Campo obligatorio</div>
+                    </td>
+                  </tr>
+
+
+
+                  <tr>
+                    <th scope="row"> * Líquido Refrigeración</th>
+                    <td>
+                      <input matInput type="number" formControlName="liquidoRefrigeracionKm"
+                        [(ngModel)]="mantenimientoPreventivo.liquidoRefrigeracionKm">
+                      <div
+                        *ngIf="thirdFormGroup.get('liquidoRefrigeracionKm')?.touched && thirdFormGroup.get('liquidoRefrigeracionKm')?.errors?.['required']"
+                        class="alert alert-danger"> Campo obligatorio</div>
+                    </td>
+                    <td><input matInput type="number" formControlName="liquidoRefrigeracionMes"
+                        [(ngModel)]="mantenimientoPreventivo.liquidoRefrigeracionMes">
+                      <div
+                        *ngIf="thirdFormGroup.get('liquidoRefrigeracionMes')?.touched && thirdFormGroup.get('liquidoRefrigeracionMes')?.errors?.['required']"
+                        class="alert alert-danger"> Campo obligatorio</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Ph Liquido Refrigeración</th>
+                    <td>
+                      <input matInput type="number" formControlName="pHLiquidoRefrigeracionKm"
+                        [(ngModel)]="mantenimientoPreventivo.pHLiquidoRefrigeracionKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="pHLiquidoRefrigeracionMes"
+                        [(ngModel)]="mantenimientoPreventivo.pHLiquidoRefrigeracionMes">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Reglaje Proyectores</th>
+                    <td>
+                      <input matInput type="number" formControlName="reglajeProyectoresKm"
+                        [(ngModel)]="mantenimientoPreventivo.reglajeProyectoresKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="reglajeProyectoresMes"
+                        [(ngModel)]="mantenimientoPreventivo.reglajeProyectoresMes">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Correa Arrastre Accesorios</th>
+                    <td>
+                      <input matInput type="number" formControlName="correaArrastreAccesoriosKm"
+                        [(ngModel)]="mantenimientoPreventivo.correaArrastreAccesoriosKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="correaArrastreAccesoriosMes"
+                        [(ngModel)]="mantenimientoPreventivo.correaArrastreAccesoriosMes">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Kit Correa Arrastre Accesorios</th>
+                    <td>
+                      <input matInput type="number" formControlName="kitCorreaArrastreAccesoriosKm"
+                        [(ngModel)]="mantenimientoPreventivo.kitCorreaArrastreAccesoriosKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="kitCorreaArrastreAccesoriosMes"
+                        [(ngModel)]="mantenimientoPreventivo.kitCorreaArrastreAccesoriosMes">
+                    </td>
+                  </tr>
+
+
+
+                  <tr>
+                    <th scope="row">Aceite Transmisión</th>
+                    <td>
+                      <input matInput type="number" formControlName="aceiteTransmisionKm"
+                        [(ngModel)]="mantenimientoPreventivo.aceiteTransmisionKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="aceiteTransmisionMes"
+                        [(ngModel)]="mantenimientoPreventivo.aceiteTransmisionMes">
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row">Bujías Encendido</th>
+                    <td>
+                      <input matInput type="number" formControlName="bujiasEncendidoKm"
+                        [(ngModel)]="mantenimientoPreventivo.bujiasEncendidoKm">
+                    </td>
+                    <td><input matInput type="number" formControlName="bujiasEncendidoMes"
+                        [(ngModel)]="mantenimientoPreventivo.bujiasEncendidoMes">
+                    </td>
+                  </tr>
+
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <br><br>
+
+      <p class="fs-6">(**) Operaciones Sistemáticas: Cambio de aceite motor, inspección general del vehículo (estado
+          neumáticos, faros, luces, frenos, limpiaparabrisas, dirección...)</p>
+
+      <br><br>
+
+      <div>
+        <button class="btn btn-warning btn-md" mat-button matStepperPrevious>Atrás</button>
+          &nbsp;&nbsp;&nbsp;
+        <button class="btn btn-primary btn-md" mat-button matStepperNext>Siguiente</button>
+      </div>
+
+      <br>
+
+    </form>
+  </mat-step>
+
+  <!-- Cuarto step -->
+  <mat-step>
+  <ng-template matStepLabel>MANTENIMIENTOS REALIZADOS</ng-template>
+
+    <div *ngFor="let mantenimiento of vehiculo.mantenimientos">
+      <app-mantenimiento-item
+        [mantenimiento]="mantenimiento"
+        (mantenimientoConsultar)="onMantenimientoConsultar($event)"
+      ></app-mantenimiento-item>
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <div>
+      <button class="btn btn-warning btn-md" mat-button matStepperPrevious>Atrás</button>
+      &nbsp;&nbsp;&nbsp;<button class="btn btn-danger btn-md" mat-button matStepperNext (click)="goBack()">Salir</button>
+    </div>
+
+    <br>
+  </mat-step>
+
+</mat-stepper>

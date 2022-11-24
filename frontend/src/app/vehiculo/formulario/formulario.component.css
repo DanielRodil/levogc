@@ -1,0 +1,30 @@
+.mat-form-field {
+  margin-top: 34px;
+}
+
+p.fs-6 {
+  color:#0c0c0c;
+}
+
+span {
+  color:#004d40;
+}
+
+p.fs-x {
+  margin-top: 1rem;
+  color: #fafbfb;
+  font-size:xx-large;
+  justify-content: center;
+  align-items: center;
+}
+#volver{
+  margin-top: .8rem;
+}
+
+#formulario ::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+
+th{
+  text-align: left;
+}

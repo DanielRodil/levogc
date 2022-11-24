@@ -1,0 +1,20 @@
+<main>
+  
+  <div class="row" id="lineaInferior">
+    <div class=" col-2"></div>
+  <div class=" col-8">
+  <p class="fs-2">Listado de vehiculos</p>
+  </div>
+  <div class=" col-2">
+    <fa-icon [icon]="volver" routerLink="/administrador"></fa-icon>
+    <p>Volver</p>
+  </div>
+</div>  
+  <div *ngFor="let vehiculo of vehiculos">
+    <app-vehiculo-item [vehiculo]="vehiculo"
+    (vehiculoEliminar)="onVehiculoEliminar($event)"
+    (vehiculoConsultar)="onVehiculoConsultar($event)"
+    (vehiculoEditar)="onVehiculoEditar($event)">
+  </app-vehiculo-item>
+  </div>
+</main>

@@ -1,0 +1,107 @@
+.login-container {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.login-form-1 {
+  padding: 5%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-form-1 h3 {
+  text-align: center;
+  color: #333;
+}
+
+.login-container form {
+  padding: 10%;
+}
+
+.btnSubmit {
+  width: 50%;
+  border-radius: 1rem;
+  padding: 1.5%;
+  border: none;
+  cursor: pointer;
+}
+
+.login-form-1 .btnSubmit {
+  font-weight: 600;
+  color: #fff;
+  background-color: #0062cc;
+}
+
+.login-form-1 .ForgetPwd {
+  color: #0062cc;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#lineaAlta {
+  
+  margin-top: -2rem;
+  height: 3rem;
+  background-color: #004d40;
+  /* font-weight: bold; */
+  /* font-size: 16px; */
+  color: white;
+  border-top-color: #fdd835;
+  border-style: solid;
+  border-left-color: #004d40;
+  border-right-color: #004d40;
+  border-bottom-color: #004d00;
+}
+
+li.nav-item{
+  margin-left: 2.5rem;
+  background-color: #004d40;
+  font-size: 16px;
+
+}
+
+a{
+  color:#fbfbf9;
+  
+}
+
+a:hover{
+  color:#fdd835;
+
+}
+
+ul.nav{
+  margin-left: -20px;
+}
+
+#tituloLogin{
+  margin-left: 10rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: bolder;
+  color:#004d00;
+  font-size: x-large;
+}
+
+.input-matricula{
+  width: 50%;
+  margin-left: 12rem;
+}
+
+.dropdown-item{
+  color:black;
+}
+
+:hover.dropdown-item{
+  color:#004d00;
+}
+
+#vehiculoIncorrecto{
+  color:red;
+  margin-top: 2rem;
+  margin-left:12rem;
+}
+
+fa-icon{
+  margin-left: -12rem;
+  padding-top: 8rem;
+}

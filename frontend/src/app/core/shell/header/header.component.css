@@ -1,0 +1,21 @@
+header {
+  color: #fdd835;
+  background-color: #292b3a;
+  height: 6rem;
+  width: 100%;
+}
+
+#columnaLogo {
+  margin-top: 1.5rem;
+}
+
+#logoGCleft {
+  margin-top: 1rem;
+  margin-right: 10rem;
+  height: 75px;
+  width: 50px;
+}
+
+#identificacion{
+  margin-top: 1.5rem;
+}

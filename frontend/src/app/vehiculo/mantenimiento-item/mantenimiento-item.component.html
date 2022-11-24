@@ -1,0 +1,152 @@
+<br>
+
+<div class="row">
+
+  <div class="col-xl-2">
+    <mat-form-field class="fs-6" appearance="outline">
+      <mat-label>Kilómetros</mat-label>
+      <input type="number" matInput [(ngModel)]="mantenimiento.kilometrosMantenimiento" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="col-xl-2">
+    <mat-form-field class="fs-6" appearance="outline">
+      <mat-label>Fecha Realización</mat-label>
+      <input type="date" matInput [(ngModel)]="mantenimiento.fechaMantenimiento" readonly />
+    </mat-form-field>
+  </div>
+
+  <div class="col-xl-8">
+    <mat-expansion-panel>
+
+      <mat-expansion-panel-header>
+        <mat-panel-title class="row justify-content-center fs-6" appearance="outline">
+          Acciones
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row justify-content-center">
+
+        <div class="col-xl-6">
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.liquidoFrenos" disabled>
+              Líquido de Frenos
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.operacionesSistematicas" disabled>
+              Operaciones Sistemáticas
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.filtroAire" disabled>
+              Filtro de Aire
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.filtroAireHabitaculo" disabled>
+              Filtro de Aire Habitáculo
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.filtroCombustible" disabled>
+              Filtro Combustible
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.filtroAntipolen" disabled>
+              Filtro Antipolen
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.correaDistribucion" disabled>
+              Correa de Distribución
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.kitDistribucion" disabled>
+              Kit de Distribución
+            </mat-checkbox>
+          </section>
+
+        </div>
+
+        <div class="col-xl-6">
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.reglajeProyectores" disabled>
+              Reglaje Proyectores
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.pHLiquidoRefrigeracion" disabled>
+              Ph Líquido Refrigeración
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.liquidoRefrigeracion" disabled>
+              Líquido Refrigeración
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.correaArrastreAccesorios" disabled>
+              Correa Arrastre Accesorios
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.kitCorreaArrastreAccesorios" disabled>
+              Kit Correa Arrastre Accesorios
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.anticongelante" disabled>
+              Anticongelante
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.aceiteTransmision" disabled>
+              Aceite Transmisión
+            </mat-checkbox>
+          </section>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="mantenimiento.bujiasEncendido" disabled>
+              Bujías Encendido
+            </mat-checkbox>
+          </section>
+
+        </div>
+
+      </div>
+
+      <br>
+
+      <div class="row justify-content-center">
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Observaciones</mat-label>
+          <textarea matInput [(ngModel)]="mantenimiento.observaciones" readonly></textarea>
+        </mat-form-field>
+
+      </div>
+
+    </mat-expansion-panel>
+  </div>
+
+</div>
+
+<br>

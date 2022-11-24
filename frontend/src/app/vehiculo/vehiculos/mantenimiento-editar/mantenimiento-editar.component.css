@@ -1,0 +1,22 @@
+form {
+  margin-top: 4rem;
+}
+
+p.fs-x {
+  margin-top: .5rem;
+  color: #fafbfb;
+  font-size:xx-large;
+  justify-content: center;
+  align-items: center;
+}
+#volver{
+  margin-top: .8rem;
+}
+
+.form-check fs-6{
+  align-items: flex-start;
+}
+
+.mat-checkbox-layout .mat-checkbox-label{
+  text-align: left;
+}

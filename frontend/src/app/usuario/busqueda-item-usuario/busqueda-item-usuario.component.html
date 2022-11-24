@@ -1,0 +1,22 @@
+<main>
+    <div class="container mt-auto">
+
+        <br>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <h2>{{ vehiculo.matricula.toUpperCase() }} &nbsp; {{ vehiculo.marca.toUpperCase() }} &nbsp; {{ vehiculo.modelo.toUpperCase() }}</h2>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-primary btn-md" (click)="consultar()">
+                    Consultar
+                </button>
+            </div>
+        </div>
+
+        <app-avisokmusuario [avisokm]="avisokm"></app-avisokmusuario>
+
+        <app-avisomesusuario [avisomes]="avisomes"></app-avisomesusuario> 
+
+    </div>
+</main>

@@ -1,0 +1,61 @@
+<div class="row" id="lineaInferior"></div>
+
+<br>
+<br>
+
+<div class="row justify-content-center">
+    <div class="col-md-6 login-form-1">
+        <form>
+            <picture>
+                <img id="librorojo" src="\assets\imagenes\librorojo.jpg" class="mx-auto d-block" style="width:25%">
+            </picture>
+            <br><br>
+            <div class="form-group">
+                <input type="text" name="usuario" class="form-control" placeholder="Introduzca su número de TIP" [(ngModel)]="usuario.usuario" />
+            </div>
+            <br>
+            <div class="form-group">
+                <input [type]="show ? 'text' : 'password'" name="contraseña" class="form-control" placeholder="Introduzca su contraseña" [(ngModel)]="usuario.contrasena"/>
+            </div>
+            <div class="campo">
+                <input  class="checkbox" type="checkbox" name="password" id="password" (click)="mostrarContrasena()">
+                <span>Ver contraseña</span>
+            </div>
+            <br>
+            <div class="form-group">
+                <button type="submit"
+                        class="btn btn-success"(click)="login()">Login</button>
+            </div>
+            <br>
+            <div class="form-group">
+                <a class="ForgetPwd" href="mailto:gestioncontraseñasLEVO@guardiacivil.es">¿Ha olvidado su contraseña?</a>
+            </div>
+        </form>
+
+        <div class="row" id="usuarioIncorrecto">{{usuarioIncorrecto}}</div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<!--Modal usuario incorrecto-->
+<!-- <div  class="modal fade" id="UsuarioIncorrecto" tabindex="-1" aria-labelledby="Usuario Incorrecto" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="UsuarioIncorrecto">Usuario Incorrecto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{usuarioIncorrecto}}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> 
+                </div>
+      </div>
+    </div>
+  </div> -->
+  
+  
+  

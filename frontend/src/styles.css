@@ -1,0 +1,38 @@
+* {
+  text-align: center;
+}
+
+main {
+  background-color: #EEEEEE;
+}
+
+#lineaInferior {
+  margin-top: -2rem;
+  height: 3rem;
+  background-color: #004d40;
+  /* font-weight: bold; */
+  /* font-size: 16px; */
+  color: white;
+  border-top-color: #fdd835;
+  border-style: solid;
+  border-left-color: #004d40;
+  border-right-color: #004d40;
+  border-bottom-color: #004d00;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]){
+  box-shadow:2px 2px 2px 2px #004d40 !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #004d00;
+}
+
+#volver{
+  color:#fafbfb;
+  margin-top: .8rem;
+}
+
+table th{
+  text-align: left;
+}

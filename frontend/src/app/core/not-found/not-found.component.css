@@ -1,0 +1,24 @@
+.emblemaGC{
+    height: 150px;
+    width: 150px;
+
+    margin-top: 4rem;
+}
+
+main{
+    color:#fdd835;
+}
+
+#lineaInferior{
+    margin-top:-2rem;
+    height: 3rem;
+    background-color: #004d40;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    border-top-color: #fdd835;
+    border-style: solid;
+    border-left-color: #004d40;
+    border-right-color: #004d40;
+    border-bottom-color: #004d00;
+}

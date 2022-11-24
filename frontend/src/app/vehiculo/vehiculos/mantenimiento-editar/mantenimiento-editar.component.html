@@ -1,0 +1,283 @@
+<div class="row" id="lineaInferior">
+  <div class=" col-2"></div>
+  <div class=" col-8">
+  <p class="fs-x">{{vehiculo.matricula|uppercase}}/Editar Mantenimiento/{{ mantenimiento.fechaMantenimiento }}</p>
+  </div>
+  <!-- <p></p>
+  <p class="fs-2"></p> -->
+  <div class=" col-2">
+    <p id="volver"><fa-icon [icon]="volver" (click)="goBack()"></fa-icon>
+    Volver</p>
+  </div>
+</div>
+
+
+<div class="container mt-auto">
+
+  <form #mantenimientoForm="ngForm" class="was-validated">
+
+    <div class="row justify-content-center">
+
+      <div class="col-xl-4">
+        <label class="form-label fs-5">Kilómetros Mantenimiento</label>
+        <input type="number" class="form-control" name="kilometrosMantenimiento" minlength="1" maxlength="6"
+          [(ngModel)]="mantenimiento.kilometrosMantenimiento" required #kilometrosMantenimiento="ngModel" [ngClass]="{
+              'is-invalid': kilometrosMantenimiento.invalid && (kilometrosMantenimiento.dirty || kilometrosMantenimiento.touched),
+              'is-valid': !kilometrosMantenimiento.invalid
+          }">
+        <div class="text-danger"
+          *ngIf="kilometrosMantenimiento.invalid && (kilometrosMantenimiento.dirty || kilometrosMantenimiento.touched)">
+          <div *ngIf="kilometrosMantenimiento.errors?.['required']">
+            Debe introducir los kilometros del vehiculo en el momento de realización del mantenimiento.
+          </div>
+          <div *ngIf="kilometrosMantenimiento.errors?.['minlength']">
+            El vehiculo debe tener un minimo de 1 km.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4">
+        <label class="form-label fs-5">Fecha Mantenimiento</label>
+        <input type="date" class="form-control" name="fechaMantenimiento" [(ngModel)]="mantenimiento.fechaMantenimiento"
+          required #fechaMantenimiento="ngModel" [ngClass]="{
+            'is-invalid': fechaMantenimiento.invalid && (fechaMantenimiento.dirty || fechaMantenimiento.touched),
+            'is-valid': !fechaMantenimiento.invalid
+        }">
+        <div class="text-danger"
+          *ngIf="fechaMantenimiento.invalid && (fechaMantenimiento.dirty || fechaMantenimiento.touched)">
+          <div *ngIf="fechaMantenimiento.errors?.['required']">
+            Debe introducir la fecha de realización del mantenimiento.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <br><br>
+
+    <fieldset class="row justify-content-center">
+
+      <label class="form-label fs-5">Acciones</label>
+
+      <br><br>
+
+      <div class="col-xl-4">
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="liquidoFrenos" id="gridCheck2" value="option2"
+            [(ngModel)]="mantenimiento.liquidoFrenos">
+          <label class="form-check-label" for="gridCheck2">
+            Líquido de Frenos
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="operacionesSistematicas" id="gridCheck1" value="option1"
+            [(ngModel)]="mantenimiento.operacionesSistematicas">
+          <label class="form-check-label" for="gridCheck1">
+            Operaciones Sistemáticas
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="filtroAire" id="gridCheck3" value="option3"
+            [(ngModel)]="mantenimiento.filtroAire">
+          <label class="form-check-label" for="gridCheck3">
+            Filtro de Aire
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="filtroAireHabitaculo" id="gridCheck4" value="option4"
+            [(ngModel)]="mantenimiento.filtroAireHabitaculo">
+          <label class="form-check-label" for="gridCheck4">
+            Filtro de Aire Habitáculo
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="filtroCombustible" id="gridCheck5" value="option5"
+            [(ngModel)]="mantenimiento.filtroCombustible">
+          <label class="form-check-label" for="gridCheck5">
+            Filtro Combustible
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="filtroAntipolen" id="gridCheck6" value="option6"
+            [(ngModel)]="mantenimiento.filtroAntipolen">
+          <label class="form-check-label" for="gridCheck6">
+            Filtro Antipolen
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="correaDistribucion" id="gridCheck7" value="option7"
+            [(ngModel)]="mantenimiento.correaDistribucion">
+          <label class="form-check-label" for="gridCheck7">
+            Correa de Distribución
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="kitDistribucion" id="gridCheck8" value="option8"
+            [(ngModel)]="mantenimiento.kitDistribucion">
+          <label class="form-check-label" for="gridCheck8">
+            Kit de Distribución
+          </label>
+        </div>
+      </div>
+
+      <div class="col-xl-4">
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="reglajePoyectores" id="gridCheck9" value="option9"
+            [(ngModel)]="mantenimiento.reglajeProyectores">
+          <label class="form-check-label" for="gridCheck9">
+            Reglaje Proyectores
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="pHLiquidoRefrigeracion" id="gridCheck10"
+            value="option10" [(ngModel)]="mantenimiento.pHLiquidoRefrigeracion">
+          <label class="form-check-label" for="gridCheck10">
+            Ph Líquido Refrigeración
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="liquidoRefrigeracion" id="gridCheck11" value="option11"
+            [(ngModel)]="mantenimiento.liquidoRefrigeracion">
+          <label class="form-check-label" for="gridCheck11">
+            Líquido Refrigeración
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="correaArrastreAccesorios" id="gridCheck12"
+            value="option12" [(ngModel)]="mantenimiento.correaArrastreAccesorios">
+          <label class="form-check-label" for="gridCheck12">
+            Correa Arrastre Accesorios
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="kitCorreaArrastreAccesorios" id="gridCheck13"
+            value="option13" [(ngModel)]="mantenimiento.kitCorreaArrastreAccesorios">
+          <label class="form-check-label" for="gridCheck13">
+            Kit Correa Arrastre Accesorios
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="anticongelante" id="gridCheck14" value="option14"
+            [(ngModel)]="mantenimiento.anticongelante">
+          <label class="form-check-label" for="gridCheck14">
+            Anticongelante
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="aceiteTransmision" id="gridCheck15" value="option15"
+            [(ngModel)]="mantenimiento.aceiteTransmision">
+          <label class="form-check-label" for="gridCheck15">
+            Aceite Transmisión
+          </label>
+        </div>
+
+        <div class="form-check fs-6">
+          <input class="form-check-input" type="checkbox" name="bujiasEncencido" id="gridCheck16" value="option16"
+            [(ngModel)]="mantenimiento.bujiasEncendido">
+          <label class="form-check-label" for="gridCheck16">
+            Bujías Encendido
+          </label>
+        </div>
+
+      </div>
+
+    </fieldset>
+
+    <br><br>
+
+    <div class="row justify-content-center">
+
+      <div class="col-xl-8">
+
+        <label class="form-label fs-5">Observaciones</label>
+
+        <textarea type="text" class="form-control" rows="4" name="observaciones" minlength="3" maxlength="500"
+          [(ngModel)]="mantenimiento.observaciones" #observaciones="ngModel" [ngClass]="{
+              'is-invalid': observaciones.invalid && (observaciones.dirty || observaciones.touched),
+              'is-valid': !observaciones.invalid
+          }"></textarea>
+
+        <div class="text-danger" *ngIf="observaciones.invalid && (observaciones.dirty || observaciones.touched)">
+          <div *ngIf="observaciones.errors?.['required']">
+            Debe introducir la descripcion de la operacion.
+          </div>
+          <div *ngIf="observaciones.errors?.['minlength']">
+            La descripcion de la operacion debe tener un minimo de 3 caracteres y un máximo de 500.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <br><br><br>
+
+    <div>
+      <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#EditarMantenimiento"
+        [disabled]="!mantenimientoForm.form.valid">Aceptar</button>
+      &nbsp;&nbsp;&nbsp;
+      <button class="btn btn-danger" name="cancelarMantenimiento" routerLink="/administrador">Cancelar</button>
+    </div>
+
+    <br>
+
+  </form>
+
+  <br><br>
+
+  <!--Modal Editar Mantenimiento-->
+
+  <div class="modal fade" id="EditarMantenimiento" tabindex="-1" aria-labelledby="EditarMantenimiento" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="EditarMantenimiento">Editar Mantenimiento</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Se ha modificado el mantenimiento  de fecha {{mantenimiento.fechaMantenimiento}} del vehiculo {{vehiculo.matricula}}
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary"data-bs-dismiss="modal" (click)="onMantenimientoEditar()" routerLink="/administrador">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal Editar Mantenimiento-->
+
+  <div class="modal fade" id="BorrarrMantenimiento" tabindex="-1" aria-labelledby="BorrarrMantenimiento" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="BorrarMantenimiento">Borrar Mantenimiento</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          El mantenimiento  de fecha {{mantenimiento.fechaMantenimiento}} del vehiculo {{vehiculo.matricula}} va a ser eliminado ¿está seguro?
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary"data-bs-dismiss="modal" (click)="onMantenimientoBorrar()" routerLink="/administrador">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+

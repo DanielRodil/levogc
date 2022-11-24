@@ -1,0 +1,65 @@
+<div class="row" id="lineaInferior">
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="row justify-content-center">
+  <div class="col-md-6 login-form-1">
+    <div class="row" id="tituloLogin">BÚSQUEDA VEHÍCULO</div>
+    <div class="row">
+      <div class="col-8">
+        <input type="text" class="form-control input-matricula" id="matricula"
+          placeholder="p.e., PGC0000A" [(ngModel)]="matricula" required>
+      </div>
+      <div class="col-4">
+      <fa-icon [icon]="limpiar" (click)="clear()">Limpiar</fa-icon>
+      </div>
+      </div>
+    <br>
+    <button type="button" class="btn btn-success btn-md" (click)="vehiculoBuscado(matricula)">
+      Buscar
+    </button>
+    <div class="row" id='vehiculoIncorrecto'>{{vehiculoIncorrecto}}</div>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div *ngFor="let vehiculo of vehiculos">
+  <app-busqueda-item-usuario [vehiculo]="vehiculo" (vehiculoConsultar)="onVehiculoConsultar($event)">
+  </app-busqueda-item-usuario>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+

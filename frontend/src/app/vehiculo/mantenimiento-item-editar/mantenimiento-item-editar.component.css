@@ -1,0 +1,8 @@
+.btn-bs-primary{
+    background-color: #004d40 ;
+    color:white;
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]){
+    box-shadow: #004d40 !important;
+}
