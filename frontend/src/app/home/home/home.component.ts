@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   login(){
    
     if(this.usuario.usuario==null||this.usuario.contrasena==null){
-       this.usuarioIncorrecto="Debe introducir el usuario y contraseña para acceder al sistema";
+       this.usuarioIncorrecto="Debe introducir un usuario y contraseña correctos para acceder al sistema";
             
       }else{
        this.authService.login(this.usuario.usuario, this.usuario.contrasena).subscribe(response=>{

@@ -33,9 +33,13 @@
         <div class="col-xl-6">
           <mat-form-field class="fs-5" appearance="outline">
             <mat-label>Fecha Alta</mat-label>
-            <input type="date" matInput placeholder="mm/dd/aaaa" formControlName="fechaAlta"
+            <input type="date" matInput [max]="fechaBuena" placeholder="mm/dd/aaaa" formControlName="fechaAlta"
               [(ngModel)]="vehiculo.fechaAlta" required />
           </mat-form-field>
+          <div
+          *ngIf="firstFormGroup.get('fechaAlta')?.touched && firstFormGroup.get('fechaAlta')?.errors?.['validateDate']"
+          class="alert alert-danger">La fecha no puede ser posterior a la fecha actual
+        </div>
         </div>
 
       </div>
@@ -51,6 +55,14 @@
             <mat-label>Marca</mat-label>
             <input type="text" matInput formControlName="marca" [(ngModel)]="vehiculo.marca" required />
           </mat-form-field>
+          <div *ngIf="firstFormGroup.get('marca')?.touched && firstFormGroup.get('marca')?.errors?.['maxlength']"
+            class="alert alert-danger">Este campo debe tener
+            {{firstFormGroup.get('marca')?.errors?.['maxlength'].requiredLength}} caracteres como máximo
+          </div>
+          <div *ngIf="firstFormGroup.get('marca')?.touched && firstFormGroup.get('marca')?.errors?.['minlength']"
+            class="alert alert-danger">Este campo debe tener al menos
+            {{firstFormGroup.get('marca')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
         </div>
 
         <div class="col-xl-4">
@@ -58,6 +70,14 @@
             <mat-label>Modelo</mat-label>
             <input type="text" matInput formControlName="modelo" [(ngModel)]="vehiculo.modelo" required />
           </mat-form-field>
+          <div *ngIf="firstFormGroup.get('modelo')?.touched && firstFormGroup.get('modelo')?.errors?.['maxlength']"
+            class="alert alert-danger">Este campo debe tener
+            {{firstFormGroup.get('modelo')?.errors?.['maxlength'].requiredLength}} caracteres como máximo
+          </div>
+          <div *ngIf="firstFormGroup.get('modelo')?.touched && firstFormGroup.get('modelo')?.errors?.['minlength']"
+            class="alert alert-danger">Este campo debe tener al menos
+            {{firstFormGroup.get('modelo')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
         </div>
 
         <div class="col-xl-4">
@@ -103,8 +123,8 @@
         <div class="col-xl-6">
           <mat-form-field class="fs-5" appearance="outline">
             <mat-label>Fecha Adjudicación</mat-label>
-            <input type="date" matInput placeholder="dd/mm/aaaa" formControlName="fechaAdjudicacion"
-              [(ngModel)]="vehiculo.fechaAdjudicacion" required />
+            <input type="date" [max]="fechaBuena" matInput placeholder="dd/mm/aaaa" formControlName="fechaAdjudicacion"
+              [(ngModel)]="vehiculo.fechaAdjudicacion" />
           </mat-form-field>
         </div>
 
@@ -113,7 +133,7 @@
       <br>
 
       <div>
-        <button class="btn btn-primary btn-md" mat-button matStepperNext [disabled]="">Siguiente</button>
+        <button class="btn btn-primary btn-md" mat-button matStepperNext [disabled]="firstFormGroup.invalid">Siguiente</button>
       </div>
 
       <br>
@@ -144,6 +164,15 @@
             <input type="text" matInput placeholder="Bicolor" formControlName="color"
               [(ngModel)]="datosTecnicosInteres.color" required />
           </mat-form-field>
+          <div *ngIf="secondFormGroup.get('color')?.touched && secondFormGroup.get('color')?.errors?.['maxlength']"
+            class="alert alert-danger">Este campo debe tener
+            {{secondFormGroup.get('color')?.errors?.['maxlength'].requiredLength}} caracteres como máximo
+          </div>
+          <div *ngIf="secondFormGroup.get('color')?.touched && secondFormGroup.get('color')?.errors?.['minlength']"
+            class="alert alert-danger">Este campo debe tener al menos
+            {{secondFormGroup.get('color')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+
         </div>
 
         <div class="col-xl-3">
@@ -201,9 +230,11 @@
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Capacidad Depósito</mat-label>
             <input type="number" matInput formControlName="capacidadDeposito"
-              [(ngModel)]="datosTecnicosInteres.capacidadDeposito" required />
-            <span matSuffix>Litros</span>
+              [(ngModel)]="datosTecnicosInteres.capacidadDeposito" step="10" />
+            <span matSuffix>&nbsp;&nbsp;Litros</span>
           </mat-form-field>
+        <div *ngIf="secondFormGroup.get('capacidadDeposito')?.touched && secondFormGroup.get('capacidadDeposito')?.errors?.['number']" class="alert alert-danger"> 
+          El valor de este campo debe estar entre 0 y 1000</div>
         </div>
 
       </div>
@@ -219,17 +250,29 @@
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Lubricante</mat-label>
             <input type="text" matInput placeholder="5W30 SYNTETIC" formControlName="lubricanteMotor"
-              [(ngModel)]="datosTecnicosInteres.lubricanteMotor" required />
+              [(ngModel)]="datosTecnicosInteres.lubricanteMotor" />
           </mat-form-field>
+          <div *ngIf="secondFormGroup.get('lubricanteMotor')?.touched && secondFormGroup.get('lubricanteMotor')?.errors?.['maxlength']"
+            class="alert alert-danger">Este campo debe tener
+            {{secondFormGroup.get('lubricanteMotor')?.errors?.['maxlength'].requiredLength}} caracteres como máximo
+          </div>
+          <div *ngIf="secondFormGroup.get('lubricanteMotor')?.touched && secondFormGroup.get('lubricanteMotor')?.errors?.['minlength']"
+            class="alert alert-danger">Este campo debe tener al menos
+            {{secondFormGroup.get('lubricanteMotor')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+
         </div>
 
         <div class="col-xl-6">
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Capacidad Carter</mat-label>
             <input type="number" matInput formControlName="capacidadCarter"
-              [(ngModel)]="datosTecnicosInteres.capacidadCarter" required />
+              [(ngModel)]="datosTecnicosInteres.capacidadCarter" />
             <span matSuffix>&nbsp;&nbsp;Litros</span>
           </mat-form-field>
+          <div *ngIf="secondFormGroup.get('capacidadCarter')?.touched && secondFormGroup.get('capacidadCarter')?.errors?.['number']" class="alert alert-danger"> 
+            El valor de este campo debe estar entre 0 y 50</div>
+
         </div>
 
       </div>
@@ -245,26 +288,41 @@
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Presión Delanteros</mat-label>
             <input type="number" matInput formControlName="presionNeumaticosDelanteros"
-              [(ngModel)]="datosTecnicosInteres.presionNeumaticosDelanteros" required />
+              [(ngModel)]="datosTecnicosInteres.presionNeumaticosDelanteros" step="0.1" />
             <span matSuffix>&nbsp;&nbsp;Kg/cm2</span>
           </mat-form-field>
+          <div *ngIf="secondFormGroup.get('presionNeumaticosDelanteros')?.touched && secondFormGroup.get('presionNeumaticosDelanteros')?.errors?.['number']" class="alert alert-danger"> 
+            El valor de este campo debe estar entre 0 y 10</div>
+
         </div>
 
         <div class="col-xl-4">
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Presión Traseros</mat-label>
             <input type="number" matInput formControlName="presionNeumaticosTraseros"
-              [(ngModel)]="datosTecnicosInteres.presionNeumaticosTraseros" required />
+              [(ngModel)]="datosTecnicosInteres.presionNeumaticosTraseros" step="0.1"/>
             <span matSuffix>&nbsp;&nbsp;Kg/cm2</span>
           </mat-form-field>
+          <div *ngIf="secondFormGroup.get('presionNeumaticosTraseros')?.touched && secondFormGroup.get('presionNeumaticosTraseros')?.errors?.['number']" class="alert alert-danger"> 
+            El valor de este campo debe estar entre 0 y 10</div>
+
         </div>
 
         <div class="col-xl-4">
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Tipo Cubiertas</mat-label>
             <input type="text" matInput placeholder="255/R17Y" formControlName="tipoCubiertas"
-              [(ngModel)]="datosTecnicosInteres.tipoCubiertas" required />
+              [(ngModel)]="datosTecnicosInteres.tipoCubiertas" />
           </mat-form-field>
+          <div *ngIf="secondFormGroup.get('tipoCubiertas')?.touched && secondFormGroup.get('tipoCubiertas')?.errors?.['maxlength']"
+            class="alert alert-danger">Este campo debe tener
+            {{secondFormGroup.get('tipoCubiertas')?.errors?.['maxlength'].requiredLength}} caracteres como máximo
+          </div>
+          <div *ngIf="secondFormGroup.get('tipoCubiertas')?.touched && secondFormGroup.get('tipoCubiertas')?.errors?.['minlength']"
+            class="alert alert-danger">Este campo debe tener al menos
+            {{secondFormGroup.get('tipoCubiertas')?.errors?.['minlength'].requiredLength}} caracteres
+          </div>
+
         </div>
 
       </div>
@@ -280,34 +338,46 @@
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Nº Baterías</mat-label>
             <input type="number" matInput formControlName="numeroBaterias"
-              [(ngModel)]="datosTecnicosInteres.numeroBaterias" required />
+              [(ngModel)]="datosTecnicosInteres.numeroBaterias" />
           </mat-form-field>
+          <div *ngIf="secondFormGroup.get('numeroBaterias')?.touched && secondFormGroup.get('numeroBaterias')?.errors?.['number']" class="alert alert-danger"> 
+            El valor de este campo debe estar entre 0 y 10</div>
+
         </div>
 
         <div class="col-xl-3">
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Amperios/Hora</mat-label>
             <input type="number" matInput formControlName="amperiosHoraBaterias"
-              [(ngModel)]="datosTecnicosInteres.amperiosHoraBaterias" required />
-            <span matSuffix>&nbsp;&nbsp;amp/h</span>
+              [(ngModel)]="datosTecnicosInteres.amperiosHoraBaterias" step="10" />
+            <span matSuffix>&nbsp;&nbsp;A/h</span>
           </mat-form-field>
+          <div *ngIf="secondFormGroup.get('amperiosHoraBaterias')?.touched && secondFormGroup.get('amperiosHoraBaterias')?.errors?.['number']" class="alert alert-danger"> 
+            El valor de este campo debe estar entre 0 y 150</div>
+
         </div>
 
         <div class="col-xl-3">
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Amperaje:</mat-label>
             <input type="number" matInput formControlName="amperajeBaterias"
-              [(ngModel)]="datosTecnicosInteres.amperajeBaterias" required />
-            <span matSuffix>&nbsp;&nbsp;amp</span>
+              [(ngModel)]="datosTecnicosInteres.amperajeBaterias"  step="50"/>
+            <span matSuffix>&nbsp;&nbsp;A</span>
           </mat-form-field>
+          <div *ngIf="secondFormGroup.get('amperajeBaterias')?.touched && secondFormGroup.get('amperajeBaterias')?.errors?.['number']" class="alert alert-danger"> 
+            El valor de este campo debe estar entre 0 y 600</div>
+
         </div>
 
         <div class="col-xl-3">
           <mat-form-field class="fs-6" appearance="outline">
             <mat-label>Voltaje:</mat-label>
-            <input type="number" matInput formControlName="voltajeBaterias"
-              [(ngModel)]="datosTecnicosInteres.voltajeBaterias" required />
-            <span matSuffix>&nbsp;&nbsp;V</span>
+            <mat-select matInput type="number" formControlName="voltajeBaterias"
+              [(ngModel)]="datosTecnicosInteres.voltajeBaterias">
+              <mat-option selected></mat-option>
+              <mat-option value="12">12 V</mat-option>
+              <mat-option value="24">24 V</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
 
@@ -318,7 +388,7 @@
       <div>
         <button class="btn btn-warning btn-md" mat-button matStepperPrevious>Atrás</button>
         &nbsp;&nbsp;&nbsp;
-        <button class="btn btn-primary btn-md" mat-button matStepperNext>Siguiente</button>
+        <button class="btn btn-primary btn-md" mat-button matStepperNext [disabled]="secondFormGroup.invalid">Siguiente</button>
       </div>
 
       <br>
@@ -368,10 +438,12 @@
                     <th scope="row">* Operaciones Sistemáticas(**)</th>
                     <td>
                       <input matInput type="number" formControlName="operacionesSistematicasKm"
-                        [(ngModel)]="mantenimientoPreventivo.operacionesSistematicasKm">
+                        [(ngModel)]="mantenimientoPreventivo.operacionesSistematicasKm" step="1000">
                       <div
                         *ngIf="thirdFormGroup.get('operacionesSistematicasKm')?.touched && thirdFormGroup.get('operacionesSistematicasKm')?.errors?.['required']"
                         class="alert alert-danger"> Campo obligatorio</div>
+                        <div *ngIf="thirdFormGroup.get('operacionesSistematicasKm')?.touched && thirdFormGroup.get('operacionesSistematicasKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
 
 
@@ -381,33 +453,43 @@
                       <div
                         *ngIf="thirdFormGroup.get('operacionesSistematicasMes')?.touched && thirdFormGroup.get('operacionesSistematicasMes')?.errors?.['required']"
                         class="alert alert-danger"> Campo obligatorio</div>
+                        <div *ngIf="thirdFormGroup.get('operacionesSistematicasMes')?.touched && thirdFormGroup.get('operacionesSistematicasMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">* Líquido de frenos</th>
                     <td>
                       <input matInput type="number" formControlName="liquidoFrenosKm"
-                        [(ngModel)]="mantenimientoPreventivo.liquidoFrenosKm">
+                        [(ngModel)]="mantenimientoPreventivo.liquidoFrenosKm"step="1000">
                       <div
                         *ngIf="thirdFormGroup.get('liquidoFrenosKm')?.touched && thirdFormGroup.get('liquidoFrenosKm')?.errors?.['required']"
                         class="alert alert-danger"> Campo obligatorio</div>
+                        <div *ngIf="thirdFormGroup.get('liquidoFrenosKm')?.touched && thirdFormGroup.get('liquidoFrenosKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="liquidoFrenosMes"
                         [(ngModel)]="mantenimientoPreventivo.liquidoFrenosMes">
                       <div
                         *ngIf="thirdFormGroup.get('liquidoFrenosMes')?.touched && thirdFormGroup.get('liquidoFrenosMes')?.errors?.['required']"
                         class="alert alert-danger"> Campo obligatorio</div>
+                        <div *ngIf="thirdFormGroup.get('liquidoFrenosMes')?.touched && thirdFormGroup.get('liquidoFrenosMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Filtro de Aire</th>
                     <td>
                       <input matInput type="number" formControlName="filtroAireKm"
-                        [(ngModel)]="mantenimientoPreventivo.filtroAireKm">
+                        [(ngModel)]="mantenimientoPreventivo.filtroAireKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('filtroAireKm')?.touched && thirdFormGroup.get('filtroAireKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td>
                       <input matInput type="number" formControlName="filtroAireMes"
                         [(ngModel)]="mantenimientoPreventivo.filtroAireMes">
+                        <div *ngIf="thirdFormGroup.get('filtroAireMes')?.touched && thirdFormGroup.get('filtroAireMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
 
@@ -415,10 +497,14 @@
                     <th scope="row">Filtro de Aire Habitáculo</th>
                     <td>
                       <input matInput type="number" formControlName="filtroAireHabitaculoKm"
-                        [(ngModel)]="mantenimientoPreventivo.filtroAireHabitaculoKm">
+                        [(ngModel)]="mantenimientoPreventivo.filtroAireHabitaculoKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('filtroAireHabitaculoKm')?.touched && thirdFormGroup.get('filtroAireHabitaculoKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="filtroAireHabitaculoMes"
                         [(ngModel)]="mantenimientoPreventivo.filtroAireHabitaculoMes">
+                        <div *ngIf="thirdFormGroup.get('filtroAireHabitaculoMes')?.touched && thirdFormGroup.get('filtroAireHabitaculoMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
 
@@ -426,10 +512,14 @@
                     <th scope="row">Filtro Combustible</th>
                     <td>
                       <input matInput type="number" formControlName="filtroCombustibleKm"
-                        [(ngModel)]="mantenimientoPreventivo.filtroCombustibleKm">
+                        [(ngModel)]="mantenimientoPreventivo.filtroCombustibleKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('filtroCombustibleKm')?.touched && thirdFormGroup.get('filtroCombustibleKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="filtroCombustibleMes"
                         [(ngModel)]="mantenimientoPreventivo.filtroCombustibleMes">
+                        <div *ngIf="thirdFormGroup.get('filtroCombustibleMes')?.touched && thirdFormGroup.get('filtroCombustibleMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
 
@@ -437,10 +527,14 @@
                     <th scope="row">Filtro Antipolen</th>
                     <td>
                       <input matInput type="number" formControlName="filtroAntipolenKm"
-                        [(ngModel)]="mantenimientoPreventivo.filtroAntipolenKm">
+                        [(ngModel)]="mantenimientoPreventivo.filtroAntipolenKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('filtroAntipolenKm')?.touched && thirdFormGroup.get('filtroAntipolenKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="filtroAntipolenMes"
                         [(ngModel)]="mantenimientoPreventivo.filtroAntipolenMes">
+                        <div *ngIf="thirdFormGroup.get('filtroAntipolenMes')?.touched && thirdFormGroup.get('filtroAntipolenMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
 
@@ -448,10 +542,14 @@
                     <th scope="row">Correa de Distribución</th>
                     <td>
                       <input matInput type="number" formControlName="correaDistribucionKm"
-                        [(ngModel)]="mantenimientoPreventivo.correaDistribucionKm">
+                        [(ngModel)]="mantenimientoPreventivo.correaDistribucionKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('correaDistribucionKm')?.touched && thirdFormGroup.get('correaDistribucionKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="correaDistribucionMes"
                         [(ngModel)]="mantenimientoPreventivo.correaDistribucionMes">
+                        <div *ngIf="thirdFormGroup.get('correaDistribucionMes')?.touched && thirdFormGroup.get('correaDistribucionMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
 
@@ -459,10 +557,14 @@
                     <th scope="row">Kit de Distribución</th>
                     <td>
                       <input matInput type="number" formControlName="kitDistribucionKm"
-                        [(ngModel)]="mantenimientoPreventivo.kitDistribucionKm">
+                        [(ngModel)]="mantenimientoPreventivo.kitDistribucionKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('kitDistribucionKm')?.touched && thirdFormGroup.get('kitDistribucionKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="kitDistribucionMes"
                         [(ngModel)]="mantenimientoPreventivo.kitDistribucionMes">
+                        <div *ngIf="thirdFormGroup.get('kitDistribucionMes')?.touched && thirdFormGroup.get('kitDistribucionMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
 
@@ -491,16 +593,21 @@
                     <th scope="row">* Anticongelante</th>
                     <td>
                       <input matInput type="number" formControlName="anticongelanteKm"
-                        [(ngModel)]="mantenimientoPreventivo.anticongelanteKm">
+                        [(ngModel)]="mantenimientoPreventivo.anticongelanteKm" step="1000">
                       <div
                         *ngIf="thirdFormGroup.get('anticongelanteKm')?.touched && thirdFormGroup.get('anticongelanteKm')?.errors?.['required']"
                         class="alert alert-danger"> Campo obligatorio</div>
+                        <div *ngIf="thirdFormGroup.get('anticongelanteKm')?.touched && thirdFormGroup.get('anticongelanteKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="anticongelanteMes"
                         [(ngModel)]="mantenimientoPreventivo.anticongelanteMes">
                       <div
                         *ngIf="thirdFormGroup.get('anticongelanteMes')?.touched && thirdFormGroup.get('anticongelanteMes')?.errors?.['required']"
                         class="alert alert-danger"> Campo obligatorio</div>
+                        <div *ngIf="thirdFormGroup.get('anticongelanteMes')?.touched && thirdFormGroup.get('anticongelanteMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
+                        
                     </td>
                   </tr>
 
@@ -510,46 +617,62 @@
                     <th scope="row"> * Líquido Refrigeración</th>
                     <td>
                       <input matInput type="number" formControlName="liquidoRefrigeracionKm"
-                        [(ngModel)]="mantenimientoPreventivo.liquidoRefrigeracionKm">
+                        [(ngModel)]="mantenimientoPreventivo.liquidoRefrigeracionKm" step="1000">
                       <div
                         *ngIf="thirdFormGroup.get('liquidoRefrigeracionKm')?.touched && thirdFormGroup.get('liquidoRefrigeracionKm')?.errors?.['required']"
                         class="alert alert-danger"> Campo obligatorio</div>
+                        <div *ngIf="thirdFormGroup.get('liquidoRefrigeracionKm')?.touched && thirdFormGroup.get('liquidoRefrigeracionKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="liquidoRefrigeracionMes"
                         [(ngModel)]="mantenimientoPreventivo.liquidoRefrigeracionMes">
                       <div
                         *ngIf="thirdFormGroup.get('liquidoRefrigeracionMes')?.touched && thirdFormGroup.get('liquidoRefrigeracionMes')?.errors?.['required']"
                         class="alert alert-danger"> Campo obligatorio</div>
+                        <div *ngIf="thirdFormGroup.get('liquidoRefrigeracionMes')?.touched && thirdFormGroup.get('liquidoRefrigeracionMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Ph Liquido Refrigeración</th>
                     <td>
                       <input matInput type="number" formControlName="pHLiquidoRefrigeracionKm"
-                        [(ngModel)]="mantenimientoPreventivo.pHLiquidoRefrigeracionKm">
+                        [(ngModel)]="mantenimientoPreventivo.pHLiquidoRefrigeracionKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('phLiquidoRefrigeracionKm')?.touched && thirdFormGroup.get('phLiquidoRefrigeracionKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="pHLiquidoRefrigeracionMes"
                         [(ngModel)]="mantenimientoPreventivo.pHLiquidoRefrigeracionMes">
+                        <div *ngIf="thirdFormGroup.get('phLiquidoRefrigeracionMes')?.touched && thirdFormGroup.get('phLiquidoRefrigeracionMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Reglaje Proyectores</th>
                     <td>
                       <input matInput type="number" formControlName="reglajeProyectoresKm"
-                        [(ngModel)]="mantenimientoPreventivo.reglajeProyectoresKm">
+                        [(ngModel)]="mantenimientoPreventivo.reglajeProyectoresKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('reglajeProyectoresKm')?.touched && thirdFormGroup.get('reglajeProyectoresKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="reglajeProyectoresMes"
                         [(ngModel)]="mantenimientoPreventivo.reglajeProyectoresMes">
+                        <div *ngIf="thirdFormGroup.get('reglajeProyectoresMes')?.touched && thirdFormGroup.get('reglajeProyectoresMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Correa Arrastre Accesorios</th>
                     <td>
                       <input matInput type="number" formControlName="correaArrastreAccesoriosKm"
-                        [(ngModel)]="mantenimientoPreventivo.correaArrastreAccesoriosKm">
+                        [(ngModel)]="mantenimientoPreventivo.correaArrastreAccesoriosKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('correaArrastreAccesoriosKm')?.touched && thirdFormGroup.get('correaArrastreAccesoriosKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="correaArrastreAccesoriosMes"
                         [(ngModel)]="mantenimientoPreventivo.correaArrastreAccesoriosMes">
+                        <div *ngIf="thirdFormGroup.get('correaArrastreAccesoriosMes')?.touched && thirdFormGroup.get('correaArrastreAccesoriosMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
 
@@ -557,23 +680,28 @@
                     <th scope="row">Kit Correa Arrastre Accesorios</th>
                     <td>
                       <input matInput type="number" formControlName="kitCorreaArrastreAccesoriosKm"
-                        [(ngModel)]="mantenimientoPreventivo.kitCorreaArrastreAccesoriosKm">
+                        [(ngModel)]="mantenimientoPreventivo.kitCorreaArrastreAccesoriosKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('kitCorreaArrastreAccesoriosKm')?.touched && thirdFormGroup.get('kitCorreaArrastreAccesoriosKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="kitCorreaArrastreAccesoriosMes"
                         [(ngModel)]="mantenimientoPreventivo.kitCorreaArrastreAccesoriosMes">
+                        <div *ngIf="thirdFormGroup.get('kitCorreaArrastreAccesoriosMes')?.touched && thirdFormGroup.get('kitCorreaArrastreAccesoriosMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
-
-
-
                   <tr>
                     <th scope="row">Aceite Transmisión</th>
                     <td>
                       <input matInput type="number" formControlName="aceiteTransmisionKm"
-                        [(ngModel)]="mantenimientoPreventivo.aceiteTransmisionKm">
+                        [(ngModel)]="mantenimientoPreventivo.aceiteTransmisionKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('aceiteTransmisionKm')?.touched && thirdFormGroup.get('aceiteTransmisionKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="aceiteTransmisionMes"
                         [(ngModel)]="mantenimientoPreventivo.aceiteTransmisionMes">
+                        <div *ngIf="thirdFormGroup.get('aceiteTransmisionMes')?.touched && thirdFormGroup.get('aceiteTransmisionMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
 
@@ -581,10 +709,14 @@
                     <th scope="row">Bujías Encendido</th>
                     <td>
                       <input matInput type="number" formControlName="bujiasEncendidoKm"
-                        [(ngModel)]="mantenimientoPreventivo.bujiasEncendidoKm">
+                        [(ngModel)]="mantenimientoPreventivo.bujiasEncendidoKm" step="1000">
+                        <div *ngIf="thirdFormGroup.get('bujiasEncendidoKm')?.touched && thirdFormGroup.get('bujiasEncendidoKm')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 1 millón</div>
                     </td>
                     <td><input matInput type="number" formControlName="bujiasEncendidoMes"
                         [(ngModel)]="mantenimientoPreventivo.bujiasEncendidoMes">
+                        <div *ngIf="thirdFormGroup.get('bujiasEncendidoMes')?.touched && thirdFormGroup.get('bujiasEncendidoMes')?.errors?.['number']" class="alert alert-danger"> 
+                          El valor de este campo debe estar entre 0 y 200</div>
                     </td>
                   </tr>
 
@@ -609,7 +741,7 @@
       <div>
         <button class="btn btn-warning btn-md" mat-button matStepperPrevious>Atrás</button>
         &nbsp;&nbsp;&nbsp;
-        <button class="btn btn-primary btn-md" mat-button matStepperNext (click)="onEditarVehiculo1()">Siguiente</button>
+        <button class="btn btn-primary btn-md" mat-button matStepperNext (click)="onEditarVehiculo1()" [disabled]="thirdFormGroup.invalid">Siguiente</button>
       </div>
 
     </form>

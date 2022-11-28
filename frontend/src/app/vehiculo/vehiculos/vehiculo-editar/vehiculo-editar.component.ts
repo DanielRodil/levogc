@@ -1,5 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Avisokm } from 'src/app/administrador/models/avisokm';
@@ -41,74 +42,76 @@ export class VehiculoEditarComponent implements OnInit {
   mantenimientoVerDatos: Mantenimiento = new MantenimientoImpl();
   mantenimientos: Mantenimiento[] = [];
 
+  fechaMaxima!:Date;
+  fechaBuena!:string|null;
+
   @Input() mantenimiento: Mantenimiento = new MantenimientoImpl();
   @Output() mantenimientoConsultar = new EventEmitter<MantenimientoImpl>();
   @Output() mantenimientoEditar = new EventEmitter<MantenimientoImpl>();
   @Output() mantenimientoEliminar = new EventEmitter<MantenimientoImpl>();
 
   firstFormGroup = this._formBuilder.group({
-    matricula: [''],
-    fechaAlta: [''],
-    marca: [''],
-    modelo: [''],
-    tipoVehiculo: [''],
-    unidadDestino: [''],
-    fechaAdjudicacion: [''],
+    matricula: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("(PGC|pgc)[0-9]{4}[A-Za-z]"),]],
+    fechaAlta: ["", [Validators.required, isValidDateAlta]],
+    marca: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    modelo: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    tipoVehiculo: ["", Validators.required],
+    unidadDestino: [""],
+    fechaAdjudicacion: [""],
   });
 
   secondFormGroup = this._formBuilder.group({
-    bastidor: [''],
-    color: [''],
-    combustible: [''],
-    cambio: [''],
-    capacidadDeposito: [''],
-    lubricanteMotor: [''],
-    capacidadCarter: [''],
-    presionNeumaticosDelanteros: [''],
-    presionNeumaticosTraseros: [''],
-    tipoCubiertas: [''],
-    numeroBaterias: [''],
-    voltajeBaterias: [''],
-    amperajeBaterias: [''],
-    amperiosHoraBaterias: [''],
-    clasificacionMedioambiental: [''],
+    bastidor: ["", [Validators.required,Validators.minLength(17)]],
+    color: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    combustible: ["", Validators.required],
+    cambio: ["", Validators.required],
+    capacidadDeposito: ["", [Validators.required, Validators.min(0), Validators.max(1000), invalidCapacidadDeposito]],
+    lubricanteMotor: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    capacidadCarter: ["", [Validators.required, Validators.min(0), Validators.max(50),invalidCapacidadCarter ]],
+    presionNeumaticosDelanteros: ["", [Validators.required, Validators.min(0), Validators.max(10), invalidDiez]],
+    presionNeumaticosTraseros: ["", [Validators.required, Validators.min(0), Validators.max(10), invalidDiez]],
+    tipoCubiertas: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    numeroBaterias: ["", [Validators.required, Validators.min(0), Validators.max(10), invalidDiez]],
+    voltajeBaterias: ["", [Validators.required]],
+    amperajeBaterias: ["", [Validators.required, Validators.min(0), Validators.max(600), invalid600]],
+    amperiosHoraBaterias: ["", [Validators.required, Validators.min(0), Validators.max(150), invalid150]],
+    clasificacionMedioambiental: ["", Validators.required],
   });
+
   thirdFormGroup = this._formBuilder.group({
     condicionesUso: ["", Validators.required],
-    observaciones: [""],
-    operacionesSistematicasKm: ["", [Validators.required, Validators.min(0)]],
-    operacionesSistematicasMes: ["", [Validators.required, Validators.min(0)]],
-    liquidoFrenosKm: ["", [Validators.required, Validators.min(0)]],
-    liquidoFrenosMes: ["", [Validators.required, Validators.min(0)]],    
-    filtroAireKm: ["", Validators.min(0)],
-    filtroAireMes: ["", Validators.min(0)],
-    filtroAireHabitaculoKm: ["", Validators.min(0)],
-    filtroAireHabitaculoMes: ["", Validators.min(0)],
-    filtroCombustibleKm: ["", Validators.min(0)],
-    filtroCombustibleMes: ["", Validators.min(0)],
-    filtroAntipolenKm: ["", Validators.min(0)],
-    filtroAntipolenMes: ["",Validators.min(0)],
-    correaDistribucionKm: ["", Validators.min(0)],
+    operacionesSistematicasKm: ["", [Validators.required, Validators.min(0), Validators.max(1000000), invalid1000000]],
+    operacionesSistematicasMes: ["", [Validators.required, Validators.min(0), Validators.max(200), invalid200]],
+    liquidoFrenosKm: ["", [Validators.required, Validators.min(0),Validators.max(1000000), invalid1000000]],
+    liquidoFrenosMes: ["", [Validators.required, Validators.min(0), Validators.max(200), invalid200]],    
+    filtroAireKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    filtroAireMes: ["", [Validators.min(0), Validators.max(200), invalid200]],
+    filtroAireHabitaculoKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    filtroAireHabitaculoMes: ["", [Validators.min(0), Validators.max(200), invalid200]],
+    filtroCombustibleKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    filtroCombustibleMes: ["", [Validators.min(0), Validators.max(200), invalid200]],
+    filtroAntipolenKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    filtroAntipolenMes: ["",[Validators.min(0), Validators.max(200), invalid200]],
+    correaDistribucionKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
     correaDistribucionMes: ["", Validators.min(0)],
-    kitDistribucionKm: ["", Validators.min(0)],
-    kitDistribucionMes: ["", Validators.min(0)],
-    anticongelanteKm: ["", [Validators.required, Validators.min(0)]],
-    anticongelanteMes: ["", [Validators.required, Validators.min(0)]],
-    liquidoRefrigeracionKm: ["", [Validators.required, Validators.min(0)]],
-    liquidoRefrigeracionMes: ["", [Validators.required, Validators.min(0)]],
-    pHLiquidoRefrigeracionKm: ["", Validators.min(0)],
-    pHLiquidoRefrigeracionMes: [""],
-    reglajeProyectoresKm: ["", Validators.min(0)],
-    reglajeProyectoresMes: ["", Validators.min(0)],
-    correaArrastreAccesoriosKm: ["", Validators.min(0)],
-    correaArrastreAccesoriosMes: ["", Validators.min(0)],
-    kitCorreaArrastreAccesoriosKm: ["", Validators.min(0)],
-    kitCorreaArrastreAccesoriosMes: [""],
-    
-    aceiteTransmisionKm: ["", Validators.min(0)],
-    aceiteTransmisionMes: ["", Validators.min(0)],
-    bujiasEncendidoKm: ["", Validators.min(0)],
-    bujiasEncendidoMes: ["", Validators.min(0)],
+    kitDistribucionKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    kitDistribucionMes: ["", [Validators.min(0), Validators.max(200), invalid200]],
+    anticongelanteKm: ["", [Validators.required, Validators.min(0),Validators.max(1000000), invalid1000000]],
+    anticongelanteMes: ["", [Validators.required, Validators.min(0), Validators.max(200), invalid200]],
+    liquidoRefrigeracionKm: ["", [Validators.required, Validators.min(0), Validators.max(1000000), invalid1000000]],
+    liquidoRefrigeracionMes: ["", [Validators.required, Validators.min(0), Validators.max(200), invalid200]],
+    pHLiquidoRefrigeracionKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    pHLiquidoRefrigeracionMes: ["",[Validators.min(0), Validators.max(200), invalid200]],
+    reglajeProyectoresKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    reglajeProyectoresMes: ["", [Validators.min(0), Validators.max(200), invalid200]],
+    correaArrastreAccesoriosKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    correaArrastreAccesoriosMes: ["", [Validators.min(0), Validators.max(200), invalid200]],
+    kitCorreaArrastreAccesoriosKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    kitCorreaArrastreAccesoriosMes: ["",[Validators.min(0), Validators.max(200), invalid200]],
+    aceiteTransmisionKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    aceiteTransmisionMes: ["", [Validators.min(0), Validators.max(200), invalid200]],
+    bujiasEncendidoKm: ["", [Validators.min(0), Validators.max(1000000), invalid1000000]],
+    bujiasEncendidoMes: ["", [Validators.min(0), Validators.max(200), invalid200]],
   });
   
   constructor(
@@ -120,7 +123,8 @@ export class VehiculoEditarComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private _formBuilder: FormBuilder,
-    private mantenimientoService: MantenimientoService
+    private mantenimientoService: MantenimientoService,
+    private date:DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -145,7 +149,9 @@ export class VehiculoEditarComponent implements OnInit {
         })
       })
     })
-  })
+  });
+  this.fechaMaxima=new Date();
+    this.fechaBuena=this.date.transform(this.fechaMaxima,"yyyy-MM-dd");
 }
 
 
@@ -179,7 +185,7 @@ export class VehiculoEditarComponent implements OnInit {
       .updateAvisoMes(this.avisomes, this.mantenimientoPreventivo, this.vehiculo.mesesActuales)
       .subscribe();
 
-    this.router.navigate([`administrador/consultar/${this.vehiculo.id}`]);
+    this.router.navigate([`administrador`]);
   }
 
   onEditarVehiculo1(): void {
@@ -246,3 +252,99 @@ goBack(){
 
  
 }
+
+export const isValidDateAlta=(c:FormControl)=>{
+  let hoy:Date= new Date();
+  let fecha:Date=new Date(c.value);
+  if(fecha>hoy){
+   return {
+    validateDate:true
+  };
+  }else{
+      return null;
+  }
+  }
+
+  export const invalidCapacidadDeposito=(c:FormControl)=>{
+    let max:number=1000;
+    let min:number=0;
+    if(c.value<min||c.value>max){
+      return{
+        number:true
+      };
+    }else{
+      return null;
+    }
+  }
+  
+  export const invalidCapacidadCarter=(c:FormControl)=>{
+    let max:number=50;
+    let min:number=0;
+    if(c.value<min||c.value>max){
+      return{
+        number:true
+      };
+    }else{
+      return null;
+    }
+  }
+  
+  export const invalidDiez=(c:FormControl)=>{
+    let max:number=10;
+    let min:number=0;
+    if(c.value<min||c.value>max){
+      return{
+        number:true
+      };
+    }else{
+      return null;
+    }
+  }
+  
+  export const invalid150=(c:FormControl)=>{
+    let max:number=150;
+    let min:number=0;
+    if(c.value<min||c.value>max){
+      return{
+        number:true
+      };
+    }else{
+      return null;
+    }
+  }
+  
+  export const invalid600=(c:FormControl)=>{
+    let max:number=600;
+    let min:number=0;
+    if(c.value<min||c.value>max){
+      return{
+        number:true
+      };
+    }else{
+      return null;
+    }
+  }
+  
+  export const invalid1000000=(c:FormControl)=>{
+    let max:number=1000000;
+    let min:number=0;
+    if(c.value<min||c.value>max){
+      return{
+        number:true
+      };
+    }else{
+      return null;
+    }
+  }
+  
+  export const invalid200=(c:FormControl)=>{
+    let max:number=200;
+    let min:number=0;
+    if(c.value<min||c.value>max){
+      return{
+        number:true
+      };
+    }else{
+      return null;
+    }
+  }

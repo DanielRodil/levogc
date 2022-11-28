@@ -10,15 +10,16 @@
 
 <div class="row justify-content-center">
   <div class="col-md-6 login-form-1">
+    <div class="row">
+      <a class="nav-link" id="limpiar" (click)="clear()">Limpiar Filtro</a>
+      </div>
     <div class="row" id="tituloLogin">BÚSQUEDA VEHÍCULO</div>
     <div class="row">
       <div class="col-8">
         <input type="text" class="form-control input-matricula" id="matricula"
           placeholder="p.e., PGC0000A" [(ngModel)]="matricula" required>
       </div>
-      <div class="col-4">
-      <fa-icon [icon]="limpiar" (click)="clear()">Limpiar</fa-icon>
-      </div>
+      
       </div>
     <br>
     <button type="button" class="btn btn-success btn-md" (click)="vehiculoBuscado(matricula)">

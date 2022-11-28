@@ -89,8 +89,7 @@ export class AvisomesService {
 
   updateAvisoMes(avisomes: Avisomes, mantenimientoPreventivo: MantenimientoPreventivo, mesesActuales: number): Observable<any> {
 
-    console.log(mantenimientoPreventivo);
-    console.log(mesesActuales);
+  
 
     avisomes.avisoLiquidoFrenosMes = this.actualizarMeses(mantenimientoPreventivo.liquidoFrenosMes, mesesActuales);
     avisomes.avisoOperacionesSistematicasMes = this.actualizarMeses(mantenimientoPreventivo.operacionesSistematicasMes, mesesActuales);
@@ -128,8 +127,7 @@ export class AvisomesService {
   actualizarMeses(propiedad: any, meses: number){
 
     if (propiedad != 0) {
-      console.log(propiedad);
-      console.log(meses);
+     
       return (propiedad - meses);
     } else {
       return 0;
@@ -149,8 +147,7 @@ export class AvisomesService {
     var months;
     let fecha2 = new Date(d2);
     let fecha1 = new Date(d1);
-    console.log(fecha1); 
-    console.log(fecha2); 
+  
     months = (fecha2.getFullYear() - fecha1.getFullYear()) * 12; 
     months -= fecha1.getMonth(); 
     months += fecha2.getMonth(); 

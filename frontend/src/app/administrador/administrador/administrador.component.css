@@ -105,3 +105,12 @@ fa-icon{
   margin-left: -12rem;
   padding-top: 8rem;
 }
+
+#limpiar{
+  color:#004d00;
+text-align: right;
+margin-top:-3rem
+}
+#limpiar:hover{
+  color:rgb(204, 239, 62);
+}

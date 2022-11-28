@@ -6,7 +6,6 @@
         <div class="row justify-content-center">
             <div class="col-4">
                 <h2>{{ vehiculo.matricula.toUpperCase() }} &nbsp; {{ vehiculo.marca.toUpperCase() }} &nbsp; {{ vehiculo.modelo.toUpperCase() }}</h2>
-                <!-- kilometrosActuales {{ vehiculo.kilometrosActuales}} mesesactuales {{ vehiculo.mesesActuales }} -->
             </div>
             <div class="col-6">
                 <button type="button" class="btn btn-primary btn-md" (click)="consultar()">
@@ -28,14 +27,11 @@
         </div>
 
         <app-avisokm [avisokm]="avisokm"></app-avisokm>
-
         <app-avisomes [avisomes]="avisomes"></app-avisomes>
-
-
-        <!-- {{ avisokm | json }} -->
-
     </div>
 </main>
+
+
 <!--Modal eliminar vehiculo-->
 <div class="modal fade" id="EliminarVehiculo" tabindex="-1" aria-labelledby="EliminarVehiculo" aria-hidden="false">
     <div class="modal-dialog modal-dialog-centered">

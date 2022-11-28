@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 
 import { HomeRoutingModule } from "./home-routing.module";
 import { HomeComponent } from "./home/home.component";
@@ -18,6 +18,6 @@ import { AuthGuard } from "../service/auth.guard";
     UsuarioModule,
     VehiculoModule,FormsModule
   ],
-  providers:[AuthGuard]
+  providers:[AuthGuard, DatePipe]
 })
 export class HomeModule {}

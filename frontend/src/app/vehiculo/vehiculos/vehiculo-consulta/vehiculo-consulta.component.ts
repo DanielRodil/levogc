@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, Pipe, PipeTransform } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DatosTecnicosInteres } from "../../models/datos-tecnicos-interes";
 import { DatosTecnicosInteresImpl } from "../../models/datos-tecnicos-interes-impl";
@@ -121,10 +121,11 @@ export class VehiculoConsultaComponent implements OnInit {
   ngOnInit(): void {
 
     let id: string = this.cargarVehiculo();
+    console.log(this.vehiculo)
     this.vehiculoService.getVehiculo(id).subscribe((response) => {
       this.vehiculo = this.vehiculoService.mapearVehiculo(response);
       this.mantenimientoService.getmantenimientoVehiculo(id).subscribe(response => {
-        this.mantenimientos = this.mantenimientoService.extraerMantenimientos(response);
+        this.mantenimientos = this.mantenimientoService.extraerMantenimientos(response).sort();
         this.vehiculo.mantenimientos=this.mantenimientos;
         this.datosTecnicosInteresService.getDatosTecnicosInteresVehiculo(id).subscribe(response => {
           this.datosTecnicosInteres = this.datosTecnicosInteresService.mapearDatosTecnicosInteres(response);
@@ -141,7 +142,8 @@ export class VehiculoConsultaComponent implements OnInit {
         })
       })
     })
-  })
+  });
+
   }
 
   cargarVehiculo(): string {
@@ -176,3 +178,4 @@ export class VehiculoConsultaComponent implements OnInit {
 
   volver= faArrowLeft;
 }
+

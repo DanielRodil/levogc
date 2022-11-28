@@ -7,12 +7,12 @@ import { MantenimientoFormComponent } from "./vehiculos/mantenimiento-form/mante
 import { VehiculosComponent } from "./vehiculos/vehiculos.component";
 
 const routes: Routes = [
-  {
-    path: "administrador/vehiculos",
-    component: VehiculosComponent,
-    canActivate:[AuthGuard],
-data:{role:'ADMIN'}
-  },
+//   {
+//     path: "administrador/vehiculos",
+//     component: VehiculosComponent,
+//     canActivate:[AuthGuard],
+// data:{role:'ADMIN'}
+//   },
   {path:"administrador/vehiculo/formulario",
   component:FormularioComponent,
   canActivate:[AuthGuard],

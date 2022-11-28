@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -24,15 +25,17 @@ export class MantenimientoEditarComponent implements OnInit {
   datosTecnicosInteres!: DatosTecnicosInteres;
   mantenimientoPreventivo!: MantenimientoPreventivo;
 
-  private host=environment.host
-
   volver= faArrowLeft;
+
+  fechaMaxima!:Date;
+  fechaBuena!:string|null;
 
   constructor(
     private vehiculoService: VehiculoService,
     private mantenimientoService: MantenimientoService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private date:DatePipe 
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +52,10 @@ export class MantenimientoEditarComponent implements OnInit {
             this.vehiculo = this.vehiculoService.mapearVehiculo(response);
           });
       });
+
+    this.fechaMaxima=new Date();
+    this.fechaBuena=this.date.transform(this.fechaMaxima,"yyyy-MM-dd");
+    console.log(this.fechaBuena);
   }
 
   cargarMantenimiento(): string {

@@ -17,6 +17,7 @@ export class MantenimientoItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+   
   }
 
   consultarMantenimiento(): void {

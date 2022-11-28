@@ -16,7 +16,7 @@
 
       <div class="col-xl-4">
         <label class="form-label fs-5">Kilómetros Mantenimiento</label>
-        <input type="number" class="form-control" name="kilometrosMantenimiento" minlength="1" maxlength="6"
+        <input type="number" class="form-control" name="kilometrosMantenimiento" min="0" max="1000000"
           [(ngModel)]="mantenimiento.kilometrosMantenimiento" required #kilometrosMantenimiento="ngModel" [ngClass]="{
               'is-invalid': kilometrosMantenimiento.invalid && (kilometrosMantenimiento.dirty || kilometrosMantenimiento.touched),
               'is-valid': !kilometrosMantenimiento.invalid
@@ -26,16 +26,16 @@
           <div *ngIf="kilometrosMantenimiento.errors?.['required']">
             Debe introducir los kilometros del vehiculo en el momento de realización del mantenimiento.
           </div>
-          <div *ngIf="kilometrosMantenimiento.errors?.['minlength']">
-            El vehiculo debe tener un minimo de 1 km.
+          <div *ngIf="kilometrosMantenimiento.errors?.['max']">
+            Número de kilómetros excedido
           </div>
         </div>
       </div>
 
       <div class="col-xl-4">
         <label class="form-label fs-5">Fecha Mantenimiento</label>
-        <input type="date" class="form-control" name="fechaMantenimiento" [(ngModel)]="mantenimiento.fechaMantenimiento"
-          required #fechaMantenimiento="ngModel" [ngClass]="{
+        <input type="date" [max]="fechaBuena" class="form-control" name="fechaMantenimiento" [(ngModel)]="mantenimiento.fechaMantenimiento"
+          required  #fechaMantenimiento="ngModel" [ngClass]="{
             'is-invalid': fechaMantenimiento.invalid && (fechaMantenimiento.dirty || fechaMantenimiento.touched),
             'is-valid': !fechaMantenimiento.invalid
         }">
@@ -43,6 +43,9 @@
           *ngIf="fechaMantenimiento.invalid && (fechaMantenimiento.dirty || fechaMantenimiento.touched)">
           <div *ngIf="fechaMantenimiento.errors?.['required']">
             Debe introducir la fecha de realización del mantenimiento.
+          </div>
+          <div *ngIf="fechaMantenimiento.errors?.['validateDate']">
+            La fecha no puede ser mayor que la actual
           </div>
         </div>
       </div>
