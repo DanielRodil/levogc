@@ -13,6 +13,7 @@ import { Mantenimiento } from "../../models/mantenimiento";
 import { MantenimientoImpl } from "../../models/mantenimiento-impl";
 import { MantenimientoPreventivo } from "../../models/planes-preventivos";
 import { Vehiculo } from "../../models/vehiculo";
+import { VehiculoImpl } from "../../models/vehiculo-impl";
 import { DatosTecnicosInteresService } from "../../service/datos-tecnicos-interes.service";
 import { MantenimientoPreventivoService } from "../../service/mantenimiento-preventivo.service";
 import { MantenimientoService } from "../../service/mantenimiento.service";
@@ -31,14 +32,11 @@ export class MantenimientoFormComponent implements OnInit {
   volver= faArrowLeft;
 
   mantenimiento: Mantenimiento = new MantenimientoImpl();
-  vehiculo!: Vehiculo;
+  vehiculo: Vehiculo=new VehiculoImpl();
   datosTecnicosInteres!: DatosTecnicosInteres;
   mantenimientoPreventivo!: MantenimientoPreventivo;
   avisokm!: Avisokm;
   avisomes!: Avisomes;
-
-  fechaMaxima!:Date;
-  fechaBuena!:string|null;
 
   constructor(
     private vehiculoService: VehiculoService,
@@ -68,8 +66,7 @@ export class MantenimientoFormComponent implements OnInit {
 
     });
 
-    this.fechaMaxima=new Date();
-    this.fechaBuena=this.date.transform(this.fechaMaxima,"yyyy-MM-dd");
+    
   }
 
   cargarId(): string {

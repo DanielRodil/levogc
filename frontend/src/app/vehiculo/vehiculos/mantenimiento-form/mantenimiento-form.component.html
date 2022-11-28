@@ -34,7 +34,7 @@
 
       <div class="col-xl-4">
         <label class="form-label fs-5">Fecha Mantenimiento</label>
-        <input type="date" [max]="fechaBuena" class="form-control" name="fechaMantenimiento" [(ngModel)]="mantenimiento.fechaMantenimiento"
+        <input type="date" class="form-control" name="fechaMantenimiento" [(ngModel)]="mantenimiento.fechaMantenimiento"
           required  #fechaMantenimiento="ngModel" [ngClass]="{
             'is-invalid': fechaMantenimiento.invalid && (fechaMantenimiento.dirty || fechaMantenimiento.touched),
             'is-valid': !fechaMantenimiento.invalid

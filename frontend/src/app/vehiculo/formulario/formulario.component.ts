@@ -24,14 +24,13 @@ import { DatePipe } from "@angular/common";
     constructor(private vehiculoService: VehiculoService){}
 
   // validate(c: AbstractControl<any, any>): any {
-  //   console.log(c.value);
   //   var subject=new Subject();
   //     this.vehiculoService
   //     .getBusquedaPorMatricula(c.value)
   //     .subscribe((response) => { 
   //       let vehiculos = this.vehiculoService.extraerVehiculos(response);
   //       if(vehiculos.length!=0){
-  //         console.log(vehiculos);
+
   //         subject.next({validateDate:true});
              
   //       }else{
@@ -45,7 +44,7 @@ import { DatePipe } from "@angular/common";
   // }
 
    isValidateMatricula(c: FormControl):any{
-      console.log(c.value);
+      
       let resultado=false;
       let vehiculos:VehiculoImpl[]=[];
       this.vehiculoService
@@ -54,14 +53,12 @@ import { DatePipe } from "@angular/common";
        vehiculos = this.vehiculoService.extraerVehiculos(response);
         if(vehiculos.length!=0){
           resultado=true
-          console.log(resultado);
           
         }else{
           resultado = false;
           };
        });
-       console.log(vehiculos);
-       return resultado;
+           return resultado;
       
 
       //  if(resultado==true){

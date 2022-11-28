@@ -121,7 +121,6 @@ export class VehiculoConsultaComponent implements OnInit {
   ngOnInit(): void {
 
     let id: string = this.cargarVehiculo();
-    console.log(this.vehiculo)
     this.vehiculoService.getVehiculo(id).subscribe((response) => {
       this.vehiculo = this.vehiculoService.mapearVehiculo(response);
       this.mantenimientoService.getmantenimientoVehiculo(id).subscribe(response => {

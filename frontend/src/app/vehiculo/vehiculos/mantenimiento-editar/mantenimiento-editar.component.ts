@@ -27,8 +27,6 @@ export class MantenimientoEditarComponent implements OnInit {
 
   volver= faArrowLeft;
 
-  fechaMaxima!:Date;
-  fechaBuena!:string|null;
 
   constructor(
     private vehiculoService: VehiculoService,
@@ -53,10 +51,7 @@ export class MantenimientoEditarComponent implements OnInit {
           });
       });
 
-    this.fechaMaxima=new Date();
-    this.fechaBuena=this.date.transform(this.fechaMaxima,"yyyy-MM-dd");
-    console.log(this.fechaBuena);
-  }
+      }
 
   cargarMantenimiento(): string {
     return this.activatedRoute.snapshot.params['id'];
